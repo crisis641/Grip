@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 
 import com.crisis641.grip.graphics.Screen;
 import com.crisis641.grip.input.Keyboard;
+import com.crisis641.grip.level.Level;
+import com.crisis641.grip.level.RandomLevel;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -27,6 +29,7 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private JFrame frame;
 	private Keyboard key;
+	private Level level;
 	private boolean running = false;
 	
 	private Screen screen;
@@ -43,6 +46,8 @@ public class Game extends Canvas implements Runnable{
 		frame = new JFrame();
 		
 		key = new Keyboard();
+		level = new RandomLevel(64,64);
+		
 		frame.addKeyListener(key);
 	}
 	
@@ -69,7 +74,7 @@ public class Game extends Canvas implements Runnable{
 		double delta = 0.0;
 		int frames = 0;
 		int updates = 0;
-		requestFocus();
+		//requestFocus();
 		while (running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -118,7 +123,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		screen.clear();
-		screen.render(x, y);
+		level.render(x, y, screen);
 		
 		for (int i = 0; i < pixels.length; i++){
 			pixels[i] = screen.pixels[i];
