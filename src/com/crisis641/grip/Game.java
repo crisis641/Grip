@@ -15,6 +15,7 @@ import com.crisis641.grip.graphics.Screen;
 import com.crisis641.grip.input.Keyboard;
 import com.crisis641.grip.level.Level;
 import com.crisis641.grip.level.RandomLevel;
+import com.crisis641.grip.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -47,9 +48,10 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
+		//level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/textures/levels/spawnlevel.png");
 
-		player = new Player(key);
+		player = new Player(300,300,key);
 		frame.addKeyListener(key);
 
 	}
